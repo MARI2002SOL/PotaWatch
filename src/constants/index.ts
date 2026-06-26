@@ -44,6 +44,8 @@ export function isValidPassword(password: string): boolean {
   return password.length >= MIN_PASSWORD_LENGTH;
 }
 
+// === Constantes del Dominio Geográfico y de Negocio (Puestos y Reportes) ===
+
 export const LAT_MIN = -90;
 export const LAT_MAX = 90;
 export const LNG_MIN = -180;

@@ -1,5 +1,5 @@
 import { type FormEvent, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import {
   getHomePathByRole,
   isValidEmail,
@@ -9,14 +9,21 @@ import {
 import { supabase } from '../../lib/supabaseClient';
 import { signUp } from '../../services/authService';
 import { getProfile } from '../../services/profileService';
+import { useAuth } from '../../hooks/useAuth';
 
 export function RegisterForm() {
   const navigate = useNavigate();
+  const { session, profile, loading } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fieldErrors, setFieldErrors] = useState<{ email?: string; password?: string }>({});
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
+
+  // Redirección automática si el usuario ya está autenticado
+  if (!loading && session && profile) {
+    return <Navigate to={getHomePathByRole(profile.role)} replace />;
+  }
 
   function validate(): boolean {
     const errors: { email?: string; password?: string } = {};

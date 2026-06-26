@@ -58,6 +58,7 @@ export function AppLayout() {
             >
               Buscar puestos
             </Link>
+            
             <Link
               to="/"
               className="hidden rounded-md px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100 hover:text-teal-800 sm:inline-block"
@@ -86,63 +87,3 @@ export function AppLayout() {
                   </Link>
                 )}
                 <div className="hidden items-center gap-2 border-l border-slate-200 pl-3 sm:flex">
-                  <div className="text-right leading-tight">
-                    <p className="max-w-[120px] truncate text-sm font-medium text-slate-800">
-                      {profile.full_name || 'Usuario'}
-                    </p>
-                    <p className="text-xs text-slate-500">{ROLE_LABELS[profile.role]}</p>
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={handleSignOut}
-                  disabled={signingOut}
-                  className="rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-700 hover:border-red-300 hover:bg-red-50 hover:text-red-700 disabled:opacity-60"
-                >
-                  {signingOut ? 'Saliendo...' : 'Cerrar sesión'}
-                </button>
-              </>
-            ) : (
-              <>
-                <Link
-                  to="/login"
-                  className="rounded-md px-3 py-1.5 text-sm text-slate-700 hover:bg-slate-100"
-                >
-                  Iniciar sesión
-                </Link>
-                <Link
-                  to="/registro"
-                  className="rounded-md bg-teal-700 px-3 py-1.5 text-sm font-medium text-white hover:bg-teal-800"
-                >
-                  Registrarse
-                </Link>
-              </>
-            )}
-          </nav>
-        </div>
-      </header>
-
-      <main className="flex-1">
-        <Outlet />
-      </main>
-
-      <footer className="border-t border-slate-200 bg-white">
-        <div className="mx-auto max-w-5xl px-4 py-8">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
-            <div>
-              <p className="font-semibold text-teal-900">PotaWatch</p>
-              <p className="mt-1 max-w-sm text-sm text-slate-600">
-                Plataforma web para el registro, reporte y consulta pública del estado sanitario de
-                puestos ambulantes de ceviche de pota en Lima.
-              </p>
-            </div>
-            <div className="text-sm text-slate-500">
-              <p>Proyecto académico · Ingeniería de Software</p>
-              <p className="mt-1">React · Supabase · Tailwind CSS</p>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  );
-}
