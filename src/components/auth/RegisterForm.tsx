@@ -20,6 +20,7 @@ export function RegisterForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
+  // Redirección automática si el usuario ya está autenticado
   if (!loading && session && profile) {
     return <Navigate to={getHomePathByRole(profile.role)} replace />;
   }

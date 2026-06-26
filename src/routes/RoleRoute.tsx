@@ -5,9 +5,10 @@ import { useAuth } from '../hooks/useAuth';
 
 interface RoleRouteProps {
   allowedRoles: UserRole[];
+  fallbackPath?: string;
 }
 
-export function RoleRoute({ allowedRoles }: RoleRouteProps) {
+export function RoleRoute({ allowedRoles, fallbackPath }: RoleRouteProps) {
   const { profile, loading } = useAuth();
 
   if (loading) {
@@ -23,7 +24,7 @@ export function RoleRoute({ allowedRoles }: RoleRouteProps) {
   }
 
   if (!allowedRoles.includes(profile.role)) {
-    return <Navigate to={getHomePathByRole(profile.role)} replace />;
+    return <Navigate to={fallbackPath ?? getHomePathByRole(profile.role)} replace />;
   }
 
   return <Outlet />;

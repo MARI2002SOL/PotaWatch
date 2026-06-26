@@ -69,3 +69,8 @@ export async function signIn(email: string, password: string): Promise<SignInRes
 
   return { error: AUTH_ERRORS.invalidCredentials };
 }
+
+export async function signOut(): Promise<{ error: string | null }> {
+  const { error } = await supabase.auth.signOut();
+  return { error: error?.message ?? null };
+}

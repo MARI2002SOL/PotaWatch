@@ -15,6 +15,7 @@ export function LoginForm() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
 
+  // Redirección automática si ya existe una sesión activa y se cargó el perfil
   if (!loading && session && profile) {
     return <Navigate to={getHomePathByRole(profile.role)} replace />;
   }
