@@ -35,25 +35,35 @@ export function AppRouter() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<AppLayout />}>
+          {/* Rutas Públicas */}
           <Route index element={<HomePage />} />
           <Route path="login" element={<LoginPage />} />
           <Route path="registro" element={<RegisterPage />} />
 
+          {/* Rutas Protegidas */}
           <Route element={<ProtectedRoute />}>
+            {/* Reportes: Ciudadanos y Vendedores */}
             <Route element={<RoleRoute allowedRoles={['ciudadano', 'vendedor']} />}>
               <Route path="reportes/nuevo" element={<CrearReportePage />} />
             </Route>
+
+            {/* Puestos: Vendedores */}
             <Route element={<RoleRoute allowedRoles={['vendedor']} fallbackPath="/" />}>
               <Route path="vendedor" element={<VendedorHome />} />
             </Route>
+
+            {/* Inspectores y Administradores */}
             <Route element={<RoleRoute allowedRoles={['inspector', 'admin']} />}>
               <Route path="inspector" element={<InspectorHome />} />
             </Route>
+
+            {/* Administradores */}
             <Route element={<RoleRoute allowedRoles={['admin']} />}>
               <Route path="admin" element={<AdminHome />} />
             </Route>
           </Route>
 
+          {/* Redirección por defecto */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
